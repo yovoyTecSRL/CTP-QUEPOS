@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mi Agente GPT Personalizado</title>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: 'Roboto', Arial, sans-serif;
+			background: linear-gradient(120deg, #1e3c72 0%, #2a5298 100%);
+			min-height: 100vh;
+			color: #fff;
+		}
+		.container {
+			max-width: 500px;
+			margin: 60px auto;
+			background: rgba(255,255,255,0.08);
+			border-radius: 18px;
+			box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+			padding: 40px 30px 30px 30px;
+			text-align: center;
+		}
+		h1 {
+			font-size: 2.5rem;
+			margin-bottom: 10px;
+			font-weight: 700;
+			letter-spacing: 1px;
+		}
+		p {
+			font-size: 1.1rem;
+			margin-bottom: 30px;
+			color: #e0e0e0;
+		}
+		.gpt-widget {
+			background: #fff;
+			border-radius: 12px;
+			box-shadow: 0 2px 8px rgba(30,60,114,0.08);
+			padding: 24px 18px;
+			color: #222;
+			margin-bottom: 18px;
+		}
+		.gpt-input-area {
+			display: flex;
+			gap: 10px;
+			margin-top: 18px;
+		}
+		.gpt-input {
+			flex: 1;
+			padding: 10px 14px;
+			border-radius: 8px;
+			border: 1px solid #b0b0b0;
+			font-size: 1rem;
+		}
+		.gpt-send-btn {
+			background: #1e3c72;
+			color: #fff;
+			border: none;
+			border-radius: 8px;
+			padding: 10px 18px;
+			font-size: 1rem;
+			cursor: pointer;
+			transition: background 0.2s;
+		}
+		.gpt-send-btn:hover {
+			background: #16305a;
+		}
+		.gpt-messages {
+			text-align: left;
+			max-height: 220px;
+			overflow-y: auto;
+			margin-bottom: 10px;
+		}
+		.gpt-message {
+			margin-bottom: 12px;
+		}
+		.gpt-message.user {
+			color: #1e3c72;
+			font-weight: 700;
+		}
+		.gpt-message.bot {
+			color: #2a5298;
+		}
+		@media (max-width: 600px) {
+			.container {
+				padding: 18px 6px;
+			}
+			h1 {
+				font-size: 2rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Mi Agente GPT</h1>
+		<p>Interactúa con tu propia inteligencia artificial personalizada. Haz preguntas, recibe respuestas y potencia tu sitio con IA.</p>
+		<div class="gpt-widget">
+			<div class="gpt-messages" id="gpt-messages">
+				<!-- Mensajes aparecerán aquí -->
+			</div>
+			<form class="gpt-input-area" id="gpt-form">
+				<input type="text" class="gpt-input" id="gpt-input" placeholder="Escribe tu mensaje..." autocomplete="off" required />
+				<button type="submit" class="gpt-send-btn">Enviar</button>
+			</form>
+		</div>
+		<small>Desarrollado por tu propia IA • &copy; 2025</small>
+	</div>
+	<script>
+		// Simulación de respuesta GPT (reemplaza por tu integración real)
+		const form = document.getElementById('gpt-form');
+		const input = document.getElementById('gpt-input');
+		const messages = document.getElementById('gpt-messages');
+
+		form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			const userMsg = input.value.trim();
+			if (!userMsg) return;
+			addMessage(userMsg, 'user');
+			input.value = '';
+			// Aquí deberías llamar a tu backend o API de GPT personalizada
+			setTimeout(() => {
+				addMessage('Esta es una respuesta simulada de tu agente GPT. Integra aquí tu API.', 'bot');
+			}, 800);
+		});
+
+		function addMessage(text, sender) {
+			const div = document.createElement('div');
+			div.className = 'gpt-message ' + sender;
+			div.textContent = (sender === 'user' ? 'Tú: ' : 'IA: ') + text;
+			messages.appendChild(div);
+			messages.scrollTop = messages.scrollHeight;
+		}
+	</script>
+</body>
+</html>
