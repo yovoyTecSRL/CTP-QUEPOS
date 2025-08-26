@@ -37,6 +37,39 @@
 			pointer-events: none;
 			animation: float2 10s ease-in-out infinite alternate;
 		}
+		.navbar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			background: rgba(30, 60, 114, 0.95);
+			backdrop-filter: blur(10px);
+			z-index: 1000;
+			padding: 12px 0;
+			box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+		}
+		.navbar ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			justify-content: center;
+			gap: 30px;
+		}
+		.navbar a {
+			color: #fff;
+			text-decoration: none;
+			font-weight: 600;
+			padding: 10px 20px;
+			border-radius: 8px;
+			transition: all 0.3s ease;
+			font-size: 1.05rem;
+		}
+		.navbar a:hover, .navbar a.active {
+			background: linear-gradient(90deg, #00c6ff, #0072ff);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
+		}
 		@keyframes float1 {
 			0% { transform: translateY(0) scale(1); }
 			100% { transform: translateY(30px) scale(1.08); }
@@ -47,7 +80,7 @@
 		}
 		.container {
 			max-width: 480px;
-			margin: 70px auto 0 auto;
+			margin: 120px auto 0 auto;
 			background: rgba(255,255,255,0.10);
 			border-radius: 22px;
 			box-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.25);
@@ -171,7 +204,15 @@
 	</style>
 </head>
 <body>
-	<div class="container">
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html" class="active">Inicio</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="portafolio.html">Portafolio</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <div class="container">
 		<h1>Mi Agente GPT</h1>
 		<p>Interactúa con tu propia inteligencia artificial personalizada.<br>Haz preguntas, recibe respuestas y potencia tu sitio con IA.</p>
 		<div class="gpt-widget">

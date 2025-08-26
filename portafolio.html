@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - Mi Agente GPT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 60%, #00c6ff 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: -80px; left: -80px;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, #00c6ff55 0%, transparent 80%);
+            z-index: 0;
+            pointer-events: none;
+            animation: float1 8s ease-in-out infinite alternate;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -100px; right: -100px;
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, #1e3c72aa 0%, transparent 80%);
+            z-index: 0;
+            pointer-events: none;
+            animation: float2 10s ease-in-out infinite alternate;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(30, 60, 114, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 12px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+        .navbar a:hover, .navbar a.active {
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
+        }
+        @keyframes float1 {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(30px) scale(1.08); }
+        }
+        @keyframes float2 {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.05); }
+        }
+        .container {
+            max-width: 1000px;
+            margin: 120px auto 0 auto;
+            background: rgba(255,255,255,0.10);
+            border-radius: 22px;
+            box-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.25);
+            padding: 48px 32px 32px 32px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(2px);
+        }
+        h1 {
+            font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+            font-size: 2.7rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #fff;
+            text-shadow: 0 2px 12px #1e3c72cc;
+        }
+        .subtitle {
+            font-size: 1.13rem;
+            margin-bottom: 40px;
+            color: #e0e8f3;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .project-card {
+            background: linear-gradient(120deg, #fff 80%, #e0e8f3 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            text-align: left;
+            box-shadow: 0 4px 18px rgba(30,60,114,0.10);
+            border: 1.5px solid #e0e8f3;
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: #222;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 198, 255, 0.25);
+        }
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, #1e3c72, #00c6ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #fff;
+        }
+        .project-content {
+            padding: 25px;
+        }
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 12px;
+        }
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .tech-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .project-links {
+            display: flex;
+            gap: 12px;
+        }
+        .project-link {
+            background: linear-gradient(90deg, #1e3c72, #00c6ff);
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s;
+            font-size: 0.9rem;
+        }
+        .project-link:hover {
+            transform: scale(1.05);
+        }
+        .stats-section {
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00c6ff;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: #e0e8f3;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 16px;
+                margin: 100px auto 0 auto;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .navbar ul {
+                gap: 15px;
+            }
+            .navbar a {
+                padding: 8px 12px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="portafolio.html" class="active">Portafolio</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Nuestro Portafolio</h1>
+        <p class="subtitle">Proyectos exitosos que demuestran el poder de la inteligencia artificial</p>
+        
+        <div class="portfolio-grid">
+            <div class="project-card">
+                <div class="project-image">🛒</div>
+                <div class="project-content">
+                    <div class="project-title">E-Commerce Inteligente</div>
+                    <div class="project-description">
+                        Plataforma de comercio electrónico con recomendaciones personalizadas basadas en IA, chatbot de ventas y análisis predictivo de inventario.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">FastAPI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Ver Demo</a>
+                        <a href="#" class="project-link">Código</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">🏥</div>
+                <div class="project-content">
+                    <div class="project-title">Sistema Médico IA</div>
+                    <div class="project-description">
+                        Aplicación de diagnóstico asistido por IA que analiza síntomas y historial médico para sugerir tratamientos y derivaciones especialistas.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">Vue.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Ver Demo</a>
+                        <a href="#" class="project-link">Caso de Estudio</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">📈</div>
+                <div class="project-content">
+                    <div class="project-title">Dashboard Analytics IA</div>
+                    <div class="project-description">
+                        Panel de control inteligente que procesa grandes volúmenes de datos en tiempo real y genera insights automáticos para la toma de decisiones.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">D3.js</span>
+                        <span class="tech-tag">Apache Kafka</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">Node.js</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Ver Demo</a>
+                        <a href="#" class="project-link">Documentación</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">🎓</div>
+                <div class="project-content">
+                    <div class="project-title">Plataforma Educativa IA</div>
+                    <div class="project-description">
+                        Sistema de aprendizaje adaptativo que personaliza contenido educativo según el progreso y estilo de aprendizaje de cada estudiante.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">AWS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Ver Demo</a>
+                        <a href="#" class="project-link">Resultados</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">🚗</div>
+                <div class="project-content">
+                    <div class="project-title">App Movilidad Urbana</div>
+                    <div class="project-description">
+                        Aplicación móvil que optimiza rutas de transporte urbano usando machine learning para predecir tráfico y sugerir alternativas eficientes.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">React Native</span>
+                        <span class="tech-tag">Google Maps API</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">TensorFlow Lite</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">App Store</a>
+                        <a href="#" class="project-link">Play Store</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">💬</div>
+                <div class="project-content">
+                    <div class="project-title">Asistente Virtual Empresarial</div>
+                    <div class="project-description">
+                        Chatbot empresarial avanzado capaz de gestionar citas, responder consultas complejas y automatizar procesos internos de RRHH.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">NLP</span>
+                        <span class="tech-tag">Dialogflow</span>
+                        <span class="tech-tag">Microsoft Bot</span>
+                        <span class="tech-tag">Azure</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Probar Bot</a>
+                        <a href="#" class="project-link">Integración</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Proyectos Completados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Satisfacción Cliente</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Soporte Técnico</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Años Experiencia</div>
+            </div>
+        </div>
+        
+        <br><br>
+        <small>Innovación tecnológica que transforma negocios • &copy; 2025</small>
+    </div>
+</body>
+</html>
