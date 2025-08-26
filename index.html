@@ -5,43 +5,149 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Mi Agente GPT Personalizado</title>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 	<style>
 		body {
 			margin: 0;
 			padding: 0;
 			font-family: 'Roboto', Arial, sans-serif;
-			background: linear-gradient(120deg, #1e3c72 0%, #2a5298 100%);
+			background: linear-gradient(135deg, #1e3c72 0%, #2a5298 60%, #00c6ff 100%);
 			min-height: 100vh;
 			color: #fff;
+			overflow-x: hidden;
+			position: relative;
+		}
+		body::before {
+			content: '';
+			position: fixed;
+			top: -80px; left: -80px;
+			width: 300px; height: 300px;
+			background: radial-gradient(circle, #00c6ff55 0%, transparent 80%);
+			z-index: 0;
+			pointer-events: none;
+			animation: float1 8s ease-in-out infinite alternate;
+		}
+		body::after {
+			content: '';
+			position: fixed;
+			bottom: -100px; right: -100px;
+			width: 350px; height: 350px;
+			background: radial-gradient(circle, #1e3c72aa 0%, transparent 80%);
+			z-index: 0;
+			pointer-events: none;
+			animation: float2 10s ease-in-out infinite alternate;
+		}
+		.navbar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			background: rgba(30, 60, 114, 0.95);
+			backdrop-filter: blur(10px);
+			z-index: 1000;
+			padding: 12px 0;
+			box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+		}
+		.navbar ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			justify-content: center;
+			gap: 30px;
+		}
+		.navbar a {
+			color: #fff;
+			text-decoration: none;
+			font-weight: 600;
+			padding: 10px 20px;
+			border-radius: 8px;
+			transition: all 0.3s ease;
+			font-size: 1.05rem;
+		}
+		.navbar a:hover, .navbar a.active {
+			background: linear-gradient(90deg, #00c6ff, #0072ff);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
+		}
+		@keyframes float1 {
+			0% { transform: translateY(0) scale(1); }
+			100% { transform: translateY(30px) scale(1.08); }
+		}
+		@keyframes float2 {
+			0% { transform: translateY(0) scale(1); }
+			100% { transform: translateY(-30px) scale(1.05); }
 		}
 		.container {
-			max-width: 500px;
-			margin: 60px auto;
-			background: rgba(255,255,255,0.08);
-			border-radius: 18px;
-			box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-			padding: 40px 30px 30px 30px;
+			max-width: 480px;
+			margin: 70px auto 0 auto;
+			background: rgba(255,255,255,0.10);
+			border-radius: 22px;
+			box-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.25);
+			padding: 48px 32px 32px 32px;
 			text-align: center;
+			position: relative;
+			z-index: 1;
+			backdrop-filter: blur(2px);
 		}
 		h1 {
-			font-size: 2.5rem;
-			margin-bottom: 10px;
+			font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+			font-size: 2.7rem;
+			margin-bottom: 12px;
 			font-weight: 700;
-			letter-spacing: 1px;
+			letter-spacing: 1.5px;
+			color: #fff;
+			text-shadow: 0 2px 12px #1e3c72cc;
 		}
 		p {
-			font-size: 1.1rem;
-			margin-bottom: 30px;
-			color: #e0e0e0;
+			font-size: 1.13rem;
+			margin-bottom: 32px;
+			color: #e0e8f3;
 		}
 		.gpt-widget {
-			background: #fff;
-			border-radius: 12px;
-			box-shadow: 0 2px 8px rgba(30,60,114,0.08);
-			padding: 24px 18px;
+			background: linear-gradient(120deg, #fff 80%, #e0e8f3 100%);
+			border-radius: 16px;
+			box-shadow: 0 4px 18px rgba(30,60,114,0.10);
+			padding: 28px 18px 18px 18px;
 			color: #222;
-			margin-bottom: 18px;
+			margin-bottom: 22px;
+			border: 1.5px solid #e0e8f3;
+			transition: box-shadow 0.2s;
+		}
+		.gpt-widget:focus-within {
+			box-shadow: 0 0 0 3px #00c6ff55;
+		}
+		.gpt-messages {
+			text-align: left;
+			max-height: 220px;
+			overflow-y: auto;
+			margin-bottom: 12px;
+			padding-right: 2px;
+		}
+		.gpt-message {
+			margin-bottom: 13px;
+			padding: 7px 12px;
+			border-radius: 8px;
+			background: #f3f7fa;
+			color: #1e3c72;
+			font-size: 1.04rem;
+			box-shadow: 0 1px 3px #1e3c7212;
+			animation: fadeInMsg 0.5s;
+		}
+		.gpt-message.user {
+			background: #e3f2fd;
+			color: #1976d2;
+			font-weight: 700;
+			align-self: flex-end;
+		}
+		.gpt-message.bot {
+			background: #e0e8f3;
+			color: #2a5298;
+			font-style: italic;
+		}
+		@keyframes fadeInMsg {
+			from { opacity: 0; transform: translateY(10px); }
+			to { opacity: 1; transform: translateY(0); }
 		}
 		.gpt-input-area {
 			display: flex;
@@ -50,61 +156,72 @@
 		}
 		.gpt-input {
 			flex: 1;
-			padding: 10px 14px;
+			padding: 12px 16px;
 			border-radius: 8px;
-			border: 1px solid #b0b0b0;
-			font-size: 1rem;
+			border: 1.5px solid #b0b0b0;
+			font-size: 1.07rem;
+			outline: none;
+			transition: border 0.2s, box-shadow 0.2s;
+		}
+		.gpt-input:focus {
+			border: 1.5px solid #00c6ff;
+			box-shadow: 0 0 0 2px #00c6ff33;
 		}
 		.gpt-send-btn {
-			background: #1e3c72;
+			background: linear-gradient(90deg, #1e3c72 0%, #00c6ff 100%);
 			color: #fff;
 			border: none;
 			border-radius: 8px;
-			padding: 10px 18px;
-			font-size: 1rem;
-			cursor: pointer;
-			transition: background 0.2s;
-		}
-		.gpt-send-btn:hover {
-			background: #16305a;
-		}
-		.gpt-messages {
-			text-align: left;
-			max-height: 220px;
-			overflow-y: auto;
-			margin-bottom: 10px;
-		}
-		.gpt-message {
-			margin-bottom: 12px;
-		}
-		.gpt-message.user {
-			color: #1e3c72;
+			padding: 12px 22px;
+			font-size: 1.07rem;
 			font-weight: 700;
+			cursor: pointer;
+			transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+			box-shadow: 0 2px 8px #1e3c7222;
 		}
-		.gpt-message.bot {
-			color: #2a5298;
+		.gpt-send-btn:hover, .gpt-send-btn:focus {
+			background: linear-gradient(90deg, #1976d2 0%, #00c6ff 100%);
+			box-shadow: 0 4px 16px #00c6ff33;
+			transform: translateY(-2px) scale(1.03);
+		}
+		small {
+			color: #e0e8f3;
+			font-size: 0.98rem;
+			letter-spacing: 0.5px;
+			opacity: 0.85;
 		}
 		@media (max-width: 600px) {
 			.container {
-				padding: 18px 6px;
+				padding: 18px 4px;
 			}
 			h1 {
 				font-size: 2rem;
+			}
+			.gpt-widget {
+				padding: 16px 4px 10px 4px;
 			}
 		}
 	</style>
 </head>
 <body>
+	<nav class="navbar">
+		<ul>
+			<li><a href="index.html" class="active">Inicio</a></li>
+			<li><a href="servicios.html">Servicios</a></li>
+			<li><a href="portafolio.html">Portafolio</a></li>
+			<li><a href="contacto.html">Contacto</a></li>
+		</ul>
+	</nav>
 	<div class="container">
 		<h1>Mi Agente GPT</h1>
-		<p>Interactúa con tu propia inteligencia artificial personalizada. Haz preguntas, recibe respuestas y potencia tu sitio con IA.</p>
+		<p>Interactúa con tu propia inteligencia artificial personalizada.<br>Haz preguntas, recibe respuestas y potencia tu sitio con IA.</p>
 		<div class="gpt-widget">
 			<div class="gpt-messages" id="gpt-messages">
 				<!-- Mensajes aparecerán aquí -->
 			</div>
-			<form class="gpt-input-area" id="gpt-form">
+			<form class="gpt-input-area" id="gpt-form" autocomplete="off">
 				<input type="text" class="gpt-input" id="gpt-input" placeholder="Escribe tu mensaje..." autocomplete="off" required />
-				<button type="submit" class="gpt-send-btn">Enviar</button>
+				<button type="submit" class="gpt-send-btn" aria-label="Enviar mensaje">Enviar</button>
 			</form>
 		</div>
 		<small>Desarrollado por tu propia IA • &copy; 2025</small>

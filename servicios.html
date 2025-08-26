@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios - Mi Agente GPT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 60%, #00c6ff 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: -80px; left: -80px;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, #00c6ff55 0%, transparent 80%);
+            z-index: 0;
+            pointer-events: none;
+            animation: float1 8s ease-in-out infinite alternate;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -100px; right: -100px;
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, #1e3c72aa 0%, transparent 80%);
+            z-index: 0;
+            pointer-events: none;
+            animation: float2 10s ease-in-out infinite alternate;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(30, 60, 114, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 12px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+        .navbar a:hover, .navbar a.active {
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
+        }
+        @keyframes float1 {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(30px) scale(1.08); }
+        }
+        @keyframes float2 {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.05); }
+        }
+        .container {
+            max-width: 900px;
+            margin: 120px auto 0 auto;
+            background: rgba(255,255,255,0.10);
+            border-radius: 22px;
+            box-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.25);
+            padding: 48px 32px 32px 32px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(2px);
+        }
+        h1 {
+            font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+            font-size: 2.7rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #fff;
+            text-shadow: 0 2px 12px #1e3c72cc;
+        }
+        .subtitle {
+            font-size: 1.13rem;
+            margin-bottom: 40px;
+            color: #e0e8f3;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .service-card {
+            background: linear-gradient(120deg, #fff 80%, #e0e8f3 100%);
+            border-radius: 16px;
+            padding: 30px 25px;
+            text-align: left;
+            box-shadow: 0 4px 18px rgba(30,60,114,0.10);
+            border: 1.5px solid #e0e8f3;
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: #222;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 198, 255, 0.2);
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #1e3c72;
+        }
+        .service-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 12px;
+        }
+        .service-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .service-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #00c6ff;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 16px;
+                margin: 100px auto 0 auto;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .navbar ul {
+                gap: 15px;
+            }
+            .navbar a {
+                padding: 8px 12px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="servicios.html" class="active">Servicios</a></li>
+            <li><a href="portafolio.html">Portafolio</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Nuestros Servicios</h1>
+        <p class="subtitle">Soluciones inteligentes impulsadas por IA para transformar tu negocio</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <div class="service-title">Chatbots Inteligentes</div>
+                <div class="service-description">
+                    Desarrollamos chatbots personalizados con IA avanzada para atención al cliente 24/7, automatización de ventas y soporte técnico especializado.
+                </div>
+                <div class="service-price">Desde $299/mes</div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <div class="service-title">Análisis de Datos IA</div>
+                <div class="service-description">
+                    Transformamos tus datos en insights accionables usando machine learning para predecir tendencias, optimizar procesos y mejorar decisiones.
+                </div>
+                <div class="service-price">Desde $599/mes</div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <div class="service-title">Desarrollo Web IA</div>
+                <div class="service-description">
+                    Creamos sitios web inteligentes con funcionalidades de IA integradas: recomendaciones personalizadas, búsqueda inteligente y más.
+                </div>
+                <div class="service-price">Desde $1,299</div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <div class="service-title">Automatización Empresarial</div>
+                <div class="service-description">
+                    Automatizamos procesos empresariales complejos usando IA para reducir costos operativos y aumentar la eficiencia hasta un 70%.
+                </div>
+                <div class="service-price">Desde $899/mes</div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🔮</div>
+                <div class="service-title">Consultoría IA Estratégica</div>
+                <div class="service-description">
+                    Asesoramiento especializado para implementar estrategias de IA en tu empresa, identificando oportunidades y creando roadmaps tecnológicos.
+                </div>
+                <div class="service-price">$200/hora</div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <div class="service-title">Optimización IA</div>
+                <div class="service-description">
+                    Mejoramos sistemas existentes integrando IA para optimizar rendimiento, reducir errores y automatizar tareas repetitivas.
+                </div>
+                <div class="service-price">Desde $499/mes</div>
+            </div>
+        </div>
+        
+        <br><br>
+        <small>Soluciones tecnológicas avanzadas • &copy; 2025</small>
+    </div>
+</body>
+</html>
